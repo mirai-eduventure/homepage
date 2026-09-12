@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/colors.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/typography.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/radius.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/motion.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/base.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/styles.css">
+<script src="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/_ds_bundle.js"></script>
+<script src="image-slot.js"></script>
+<style>
+.nav-hamburger{display:none}
+@media (max-width:780px){
+  [style*="display:grid"]{grid-template-columns:1fr !important}
+  section[style*="min-height:640px"]{min-height:480px !important}
+  [style*="position:sticky"][style*="top:96px"]{position:static !important}
+  .nav-desktop{display:none !important}
+  .nav-hamburger{display:flex !important}
+}
+@media (min-width:781px){
+  .nav-mobile{display:none !important}
+}
+</style>
+<title>Customized Training Program — Mirai Eduventure Indonesia</title>
+</helmet>
+<div style="background:var(--surface-page);min-height:100vh">
+
+<a href="services-vep.dc.html" style="position:sticky;top:0;z-index:21;display:block;width:100%;height:110px;overflow:hidden;border:none">
+<image-slot id="promo-banner" shape="rect" fit="cover" src="assets/promo-banner-vep-batch3-v3.png" placeholder="プロモーションバナー画像をここにドラッグ&amp;ドロップ" style="width:100%;height:100%"></image-slot>
+</a>
+
+<header style="position:sticky;top:110px;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 24px;background:rgba(253,250,246,0.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-subtle)">
+<a href="index.dc.html" style="border:none;display:flex"><x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Logo" hint-size="150px,40px" basePath="assets/logo"></x-import></a>
+<nav class="nav-desktop" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+<a href="services.dc.html" style="border:none;font-size:14px;font-weight:500;color:var(--terracotta-600)">{{ t.nav.services }}</a>
+<a href="partners.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.partners }}</a>
+<a href="voices.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.voices }}</a>
+<a href="about.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.about }}</a>
+<a href="news.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.news }}</a>
+<div style="display:flex;gap:4px;background:var(--ink-100);border-radius:999px;padding:3px">
+<button onclick="{{ setLangEn }}" style="border:none;background:{{ langBg.en }};color:{{ langColor.en }};font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;cursor:pointer;font-family:inherit">EN</button>
+<button onclick="{{ setLangJa }}" style="border:none;background:{{ langBg.ja }};color:{{ langColor.ja }};font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;cursor:pointer;font-family:inherit">JA</button>
+</div>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="110px,36px" size="sm" href="contact.dc.html">{{ t.nav.contact }}</x-import>
+</nav>
+<button class="nav-hamburger" onclick="{{ toggleMenu }}" aria-label="Menu" style="border:none;background:transparent;cursor:pointer;padding:10px;flex-direction:column;gap:5px;align-items:center;justify-content:center">
+<span style="display:block;width:22px;height:2px;background:var(--ink-900)"></span>
+<span style="display:block;width:22px;height:2px;background:var(--ink-900)"></span>
+<span style="display:block;width:22px;height:2px;background:var(--ink-900)"></span>
+</button>
+</header>
+
+<div class="nav-mobile" style="display:{{ menuOpenDisplay }};position:fixed;inset:0;z-index:30;background:var(--surface-page);flex-direction:column;padding:24px;gap:4px;overflow-y:auto">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Logo" hint-size="130px,32px" basePath="assets/logo"></x-import>
+<button onclick="{{ toggleMenu }}" aria-label="Close" style="border:none;background:transparent;font-size:30px;line-height:1;cursor:pointer;color:var(--ink-900);padding:4px 10px">&times;</button>
+</div>
+<a href="services.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);font-weight:500;color:var(--terracotta-600)">{{ t.nav.services }}</a>
+<a href="partners.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.partners }}</a>
+<a href="voices.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.voices }}</a>
+<a href="about.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.about }}</a>
+<a href="news.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.news }}</a>
+<div style="display:flex;gap:8px;margin:16px 0">
+<button onclick="{{ setLangEn }}" style="flex:1;border:none;background:{{ langBg.en }};color:{{ langColor.en }};font-size:14px;font-weight:500;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit">EN</button>
+<button onclick="{{ setLangJa }}" style="flex:1;border:none;background:{{ langBg.ja }};color:{{ langColor.ja }};font-size:14px;font-weight:500;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit">JA</button>
+</div>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="100%,52px" size="lg" fullWidth="true" href="contact.dc.html">{{ t.nav.contact }}</x-import>
+</div>
+
+<section style="background:var(--surface-inverse);color:var(--cream);padding:64px 24px">
+<div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:16px">
+<span style="font-size:13px;color:rgba(253,250,246,0.6)">{{ t.cust.crumb }}</span>
+<span class="mei-eyebrow" style="color:rgba(253,250,246,0.7)">{{ t.cust.eyebrow }}</span>
+<h1 style="color:var(--cream);font-size:clamp(28px,3.6vw,40px);max-width:480px">{{ t.cust.headline }}</h1>
+<p style="color:rgba(253,250,246,0.85);font-size:16px;max-width:460px;line-height:1.6">{{ t.cust.sub }}</p>
+<div><x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="190px,48px" variant="primary" size="lg" href="contact.dc.html">{{ t.cust.ctaProposal }}</x-import></div>
+</div>
+<div style="aspect-ratio:4/5;border-radius:16px;background:var(--gradient-sunrise);display:flex;align-items:center;justify-content:center;color:rgba(253,250,246,0.75);font-size:14px;text-align:center;padding:24px">Training session placeholder — 4:5</div>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:48px">
+<div>
+<span class="mei-eyebrow">{{ t.cust.overview.eyebrow }}</span>
+<h2 style="font-size:26px;margin:8px 0 12px">{{ t.cust.overview.title }}</h2>
+<p style="font-size:15px;color:var(--text-body);line-height:1.6">{{ t.cust.overview.body }}</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;background:var(--surface-sunken);border-radius:12px;padding:20px">
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="color:var(--text-muted)">{{ t.cust.tbl.client }}</span><span style="text-align:right">{{ t.cust.tbl.clientVal }}</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="color:var(--text-muted)">{{ t.cust.tbl.format }}</span><span style="text-align:right">{{ t.cust.tbl.formatVal }}</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="color:var(--text-muted)">{{ t.cust.tbl.deliv }}</span><span>{{ t.cust.tbl.delivVal }}</span></div>
+<div style="display:flex;justify-content:space-between;gap:12px;font-size:14px"><span style="color:var(--text-muted)">{{ t.cust.tbl.incl }}</span><span style="text-align:right">{{ t.cust.tbl.inclVal }}</span></div>
+</div>
+</section>
+
+<section style="background:var(--surface-sunken);padding:64px 24px">
+<div style="max-width:1160px;margin:0 auto">
+<span class="mei-eyebrow">{{ t.cust.process.eyebrow }}</span>
+<h2 style="font-size:26px;margin:8px 0 32px">{{ t.cust.process.title }}</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+<div><span style="display:inline-flex;width:32px;height:32px;border-radius:999px;background:var(--terracotta-500);color:var(--white);align-items:center;justify-content:center;font-size:14px">1</span><h3 style="font-size:16px;margin:10px 0 6px">{{ t.cust.step1 }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.cust.step1Body }}</p></div>
+<div><span style="display:inline-flex;width:32px;height:32px;border-radius:999px;background:var(--terracotta-500);color:var(--white);align-items:center;justify-content:center;font-size:14px">2</span><h3 style="font-size:16px;margin:10px 0 6px">{{ t.cust.step2 }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.cust.step2Body }}</p></div>
+<div><span style="display:inline-flex;width:32px;height:32px;border-radius:999px;background:var(--terracotta-500);color:var(--white);align-items:center;justify-content:center;font-size:14px">3</span><h3 style="font-size:16px;margin:10px 0 6px">{{ t.cust.step3 }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.cust.step3Body }}</p></div>
+</div>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:64px 24px">
+<div style="background:var(--surface-inverse);border-radius:16px;padding:40px;display:grid;grid-template-columns:1fr 1.2fr;gap:32px;color:var(--cream)">
+<div style="border-radius:12px;background:rgba(253,250,246,0.08);display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(253,250,246,0.6);aspect-ratio:4/3">Session photo placeholder — 4:3</div>
+<div>
+<span class="mei-eyebrow" style="color:rgba(253,250,246,0.7)">{{ t.cust.case.eyebrow }}</span>
+<h2 style="color:var(--cream);font-size:22px;margin:8px 0 8px">{{ t.cust.case.title }}</h2>
+<p style="font-weight:500;font-size:15px;margin-bottom:8px">{{ t.cust.case.name }}</p>
+<p style="font-size:14px;color:rgba(253,250,246,0.85);line-height:1.6;margin-bottom:12px">{{ t.cust.case.body }}</p>
+<ul style="font-size:14px;color:rgba(253,250,246,0.85);padding-left:18px;margin:0 0 12px">
+<li>{{ t.cust.case.li1 }}</li><li>{{ t.cust.case.li2 }}</li><li>{{ t.cust.case.li3 }}</li>
+</ul>
+<a href="contact.dc.html" style="border:none;font-size:14px;font-weight:500;color:var(--cream)">{{ t.cust.case.cta }}</a>
+</div>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:0 24px 96px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.CTABanner" hint-size="100%,240px" title="{{ t.cust.finalCta.title }}" body="{{ t.cust.finalCta.body }}" action="{{ t.cta.contactUs }}" href="contact.dc.html"></x-import>
+</section>
+
+<footer style="background:var(--surface-inverse);color:rgba(253,250,246,0.78);padding:64px 24px 24px">
+<div style="max-width:1160px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:24px;max-width:300px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Logo" hint-size="90px,26px" variant="horizontal-white" basePath="assets/logo" style="height:26px"></x-import>
+<p style="font-size:13px;line-height:1.6;color:rgba(253,250,246,0.7)">{{ t.footer.tagline }}</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.5)">{{ t.footer.programs }}</span>
+<a href="services-vep.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Virtual Exchange Program</a>
+<a href="services-saga.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Exchange Program in Saga &amp; Fukuoka</a>
+<a href="services-bali.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Edutourism Program in Bali</a>
+<a href="services-language.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Language Program</a>
+<a href="services-customized.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Customized Training Program</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.5)">{{ t.footer.company }}</span>
+<a href="about.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.about }}</a>
+<a href="partners.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.partners }}</a>
+<a href="voices.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.voices }}</a>
+<a href="news.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.news }}</a>
+<a href="contact.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.contact }}</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;max-width:260px">
+<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.5)">{{ t.footer.getInTouch }}</span>
+<a href="mailto:info@miraieduventure.com" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">info@miraieduventure.com</a>
+<span style="color:rgba(253,250,246,0.86);font-size:14px">+62 813 8532 4750</span>
+<span style="color:rgba(253,250,246,0.65);font-size:13px;line-height:1.5">Maison De Wisteria Baldwin 1-10, Kel. Ujung Menteng, Kec. Cakung, East Jakarta 13960</span>
+</div>
+</div>
+<div style="max-width:1160px;margin:24px auto 0;padding-top:16px;border-top:1px solid rgba(253,250,246,0.14);font-size:13px;color:rgba(253,250,246,0.55);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span>{{ t.footer.copyright }}</span><span>{{ t.footer.foundedLine }}</span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const T = {
+en: {
+  nav:{services:"Services",partners:"Partners",voices:"Voices",about:"About",news:"News",contact:"Contact"},
+  footer:{programs:"Programs",company:"Company",getInTouch:"Get in touch",about:"About",partners:"Partners",voices:"Voices",news:"News",contact:"Contact",
+    tagline:"We create real, human connections across borders — not tourism, but real connection — that open students' worlds and give them the chance to change their course.",
+    copyright:"© 2026 Mirai Eduventure Indonesia. All rights reserved.",foundedLine:"Founded 2023 · Jakarta"},
+  cta:{contactUs:"Contact us"},
+  cust:{crumb:"Home · Services · Customized Training",eyebrow:"Program 05 · For institutions",
+    headline:"Training designed around your institution's needs.",
+    sub:"Bespoke training programs for educational institutions and international organizations. Consultation → custom curriculum → delivery & certification.",
+    ctaProposal:"Request a proposal",
+    overview:{eyebrow:"Overview",title:"Every institution is different.",body:"We design and deliver bespoke training programs for educational institutions and international organizations — starting from your goals, not a template."},
+    tbl:{client:"Client type",clientVal:"Educational institutions & international organizations",format:"Format",formatVal:"Custom — in-person, hybrid, or online",
+      deliv:"Delivered by",delivVal:"Our specialist instructors",incl:"Includes",inclVal:"Curriculum design, delivery, certification"},
+    process:{eyebrow:"Our process",title:"Three steps, from conversation to certificate."},
+    step1:"Consultation",step1Body:"We start by understanding your institution — the learners, the context, and what \u201csuccess\u201d actually looks like.",
+    step2:"Custom curriculum design",step2Body:"We design the program end-to-end — content, structure, assessments — around your specific goals.",
+    step3:"Delivery & certification",step3Body:"Delivered by our specialist instructors. Every participant receives certification on completion.",
+    case:{eyebrow:"Flagship case study",title:"A program built for the real world.",name:"IOM Indonesia — GED Refugee Peer Teacher Training Programme",
+      body:"We designed and delivered a peer-teacher training programme for the International Organization for Migration (IOM) Indonesia — preparing refugee community members to teach the GED curriculum to their peers.",
+      li1:"Custom curriculum design end-to-end",li2:"Delivered by our specialist instructors",li3:"Certification for every participant",cta:"Discuss a similar program →"},
+    finalCta:{title:"Let's design a training program for your institution.",body:"Tell us about your learners, timeline, and objectives. We'll take it from there."}},
+},
+ja: {
+  nav:{services:"サービス",partners:"パートナー校",voices:"参加者の声",about:"私たちについて",news:"ニュース",contact:"お問い合わせ"},
+  footer:{programs:"プログラム",company:"会社情報",getInTouch:"お問い合わせ",about:"私たちについて",partners:"パートナー校",voices:"参加者の声",news:"ニュース",contact:"お問い合わせ",
+    tagline:"国境を越えた本物の人と人とのつながり。観光ではない、本当の出会いを届けます。生徒の視野を広げ、さまざまな人生の選択肢を。",
+    copyright:"© 2026 Mirai Eduventure Indonesia. All rights reserved.",foundedLine:"2023年設立 · ジャカルタ"},
+  cta:{contactUs:"お問い合わせ"},
+  cust:{crumb:"ホーム · サービス · Customized Training Program",eyebrow:"プログラム 05 · 教育機関向け",
+    headline:"貴機関のニーズに合わせて設計する研修。",
+    sub:"教育機関・国際機関のためのオーダーメイド研修プログラム。コンサルティング → カリキュラム設計 → 実施と証書発行までを一貫してご提供。",
+    ctaProposal:"ご提案書を依頼する",
+    overview:{eyebrow:"概要",title:"どの機関も違う——だからこそ。",body:"教育機関・国際機関のためにオーダーメイド研修プログラムを設計・実施します——テンプレートではなく、貴機関の目標を起点に。"},
+    tbl:{client:"対象",clientVal:"教育機関・国際機関",format:"形式",formatVal:"カスタム——対面、ハイブリッド、オンライン",
+      deliv:"実施",delivVal:"専門インストラクター",incl:"含まれるもの",inclVal:"カリキュラム設計、実施、証書発行"},
+    process:{eyebrow:"プロセス",title:"対話から証書まで、3ステップ。"},
+    step1:"コンサルティング",step1Body:"貴機関の理解から始めます——学習者、コンテキスト、そして「成功」の具体像。",
+    step2:"カスタムカリキュラム設計",step2Body:"コンテンツ、構成、評価まで——貴機関の目標に合わせて一貫設計します。",
+    step3:"実施と証書発行",step3Body:"専門インストラクターが実施。修了時には全参加者に証書を発行します。",
+    case:{eyebrow:"代表的なケーススタディ",title:"現実に対応する、本物のプログラム。",name:"IOM Indonesia — GED Refugee Peer Teacher Training Programme",
+      body:"国際移住機関(IOM)インドネシア向けに、ピアティーチャー研修プログラムを設計・実施しました——難民コミュニティのメンバーが、仲間に GED カリキュラムを教えられるようになるための研修です。",
+      li1:"エンドツーエンドのカスタムカリキュラム設計",li2:"専門インストラクターによる実施",li3:"全参加者への証書発行",cta:"同様のプログラムを相談する →"},
+    finalCta:{title:"貴機関のための研修プログラムを、一緒に設計しませんか。",body:"学習者、スケジュール、目的をお聞かせください——そこから私たちが引き取ります。"}},
+},
+};
+class Component extends DCLogic {
+  state = { lang: (typeof localStorage !== 'undefined' && localStorage.getItem('mei-lang')) || 'en', menuOpen: false };
+  setLang(l){ try{ localStorage.setItem('mei-lang', l); }catch(e){} this.setState({ lang: l }); }
+  toggleMenu(){ this.setState(s => ({ menuOpen: !s.menuOpen })); }
+  renderVals() {
+    const lang = this.state.lang; const t = T[lang];
+    return {
+      t, lang, setLangEn: () => this.setLang('en'), setLangJa: () => this.setLang('ja'),
+      langBg: { en: lang === 'en' ? 'var(--terracotta-500)' : 'transparent', ja: lang === 'ja' ? 'var(--terracotta-500)' : 'transparent' },
+      langColor: { en: lang === 'en' ? 'var(--white)' : 'var(--text-body)', ja: lang === 'ja' ? 'var(--white)' : 'var(--text-body)' },
+      menuOpenDisplay: this.state.menuOpen ? 'flex' : 'none', toggleMenu: () => this.toggleMenu(),
+    };
+  }
+}
+</script>
+</body>
+</html>

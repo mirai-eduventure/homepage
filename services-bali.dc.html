@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/colors.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/typography.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/radius.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/motion.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/tokens/base.css">
+<link rel="stylesheet" href="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/styles.css">
+<script src="_ds/mirai-eduventure-design-system-fe8ae767-6b72-4ae0-8763-97a0ebca8137/_ds_bundle.js"></script>
+<script src="image-slot.js"></script>
+<style>
+.nav-hamburger{display:none}
+@media (max-width:780px){
+  [style*="display:grid"]{grid-template-columns:1fr !important}
+  section[style*="min-height:640px"]{min-height:480px !important}
+  [style*="position:sticky"][style*="top:96px"]{position:static !important}
+  .nav-desktop{display:none !important}
+  .nav-hamburger{display:flex !important}
+}
+@media (min-width:781px){
+  .nav-mobile{display:none !important}
+}
+</style>
+<title>Edutourism Program in Bali — Mirai Eduventure Indonesia</title>
+</helmet>
+<div style="background:var(--surface-page);min-height:100vh">
+
+<a href="services-vep.dc.html" style="position:sticky;top:0;z-index:21;display:block;width:100%;height:110px;overflow:hidden;border:none">
+<image-slot id="promo-banner" shape="rect" fit="cover" src="assets/promo-banner-vep-batch3-v3.png" placeholder="プロモーションバナー画像をここにドラッグ&amp;ドロップ" style="width:100%;height:100%"></image-slot>
+</a>
+
+<header style="position:sticky;top:110px;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 24px;background:rgba(253,250,246,0.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-subtle)">
+<a href="index.dc.html" style="border:none;display:flex"><x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Logo" hint-size="150px,40px" basePath="assets/logo"></x-import></a>
+<nav class="nav-desktop" style="display:flex;align-items:center;gap:26px;flex-wrap:wrap">
+<a href="services.dc.html" style="border:none;font-size:14px;font-weight:500;color:var(--terracotta-600)">{{ t.nav.services }}</a>
+<a href="partners.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.partners }}</a>
+<a href="voices.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.voices }}</a>
+<a href="about.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.about }}</a>
+<a href="news.dc.html" style="border:none;font-size:14px;color:var(--text-body)">{{ t.nav.news }}</a>
+<div style="display:flex;gap:4px;background:var(--ink-100);border-radius:999px;padding:3px">
+<button onclick="{{ setLangEn }}" style="border:none;background:{{ langBg.en }};color:{{ langColor.en }};font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;cursor:pointer;font-family:inherit">EN</button>
+<button onclick="{{ setLangJa }}" style="border:none;background:{{ langBg.ja }};color:{{ langColor.ja }};font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px;cursor:pointer;font-family:inherit">JA</button>
+</div>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="110px,36px" size="sm" href="contact.dc.html">{{ t.nav.contact }}</x-import>
+</nav>
+<button class="nav-hamburger" onclick="{{ toggleMenu }}" aria-label="Menu" style="border:none;background:transparent;cursor:pointer;padding:10px;flex-direction:column;gap:5px;align-items:center;justify-content:center">
+<span style="display:block;width:22px;height:2px;background:var(--ink-900)"></span>
+<span style="display:block;width:22px;height:2px;background:var(--ink-900)"></span>
+<span style="display:block;width:22px;height:2px;background:var(--ink-900)"></span>
+</button>
+</header>
+
+<div class="nav-mobile" style="display:{{ menuOpenDisplay }};position:fixed;inset:0;z-index:30;background:var(--surface-page);flex-direction:column;padding:24px;gap:4px;overflow-y:auto">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Logo" hint-size="130px,32px" basePath="assets/logo"></x-import>
+<button onclick="{{ toggleMenu }}" aria-label="Close" style="border:none;background:transparent;font-size:30px;line-height:1;cursor:pointer;color:var(--ink-900);padding:4px 10px">&times;</button>
+</div>
+<a href="services.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);font-weight:500;color:var(--terracotta-600)">{{ t.nav.services }}</a>
+<a href="partners.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.partners }}</a>
+<a href="voices.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.voices }}</a>
+<a href="about.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.about }}</a>
+<a href="news.dc.html" style="border:none;font-size:18px;padding:14px 4px;border-bottom:1px solid var(--border-subtle);color:var(--text-body)">{{ t.nav.news }}</a>
+<div style="display:flex;gap:8px;margin:16px 0">
+<button onclick="{{ setLangEn }}" style="flex:1;border:none;background:{{ langBg.en }};color:{{ langColor.en }};font-size:14px;font-weight:500;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit">EN</button>
+<button onclick="{{ setLangJa }}" style="flex:1;border:none;background:{{ langBg.ja }};color:{{ langColor.ja }};font-size:14px;font-weight:500;padding:12px;border-radius:8px;cursor:pointer;font-family:inherit">JA</button>
+</div>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="100%,52px" size="lg" fullWidth="true" href="contact.dc.html">{{ t.nav.contact }}</x-import>
+</div>
+
+<section style="background:var(--surface-inverse);color:var(--cream);padding:64px 24px">
+<div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.1fr 0.9fr;gap:48px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:16px">
+<span style="font-size:13px;color:rgba(253,250,246,0.6)">{{ t.bali.crumb }}</span>
+<span class="mei-eyebrow" style="color:rgba(253,250,246,0.7)">{{ t.bali.eyebrow }}</span>
+<h1 style="color:var(--cream);font-size:clamp(28px,3.6vw,38px);max-width:520px">{{ t.bali.headline1 }}<br/>{{ t.bali.headline2 }}</h1>
+<p style="color:rgba(253,250,246,0.85);font-size:16px;max-width:460px;line-height:1.6">{{ t.bali.sub }}</p>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="180px,48px" variant="primary" size="lg" href="contact.dc.html">{{ t.bali.ctaQuote }}</x-import>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="180px,48px" variant="inverse" size="lg" href="#plans">{{ t.bali.ctaPlans }}</x-import>
+</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+<span style="padding:4px 10px;border-radius:999px;background:rgba(253,250,246,0.12);color:var(--cream);font-size:12px">{{ t.bali.badgeLocation }}</span>
+<span style="padding:4px 10px;border-radius:999px;background:rgba(253,250,246,0.12);color:var(--cream);font-size:12px">{{ t.bali.badgeDuration }}</span>
+<span style="padding:4px 10px;border-radius:999px;background:rgba(253,250,246,0.12);color:var(--cream);font-size:12px">{{ t.bali.badgeGroup }}</span>
+</div>
+</div>
+<div style="aspect-ratio:4/5;border-radius:16px;background:var(--gradient-sunrise);display:flex;align-items:center;justify-content:center;color:rgba(253,250,246,0.75);font-size:14px;text-align:center;padding:24px">Cohort photo placeholder — 4:5</div>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:64px 24px">
+<span class="mei-eyebrow">{{ t.bali.whyBali.eyebrow }}</span>
+<h2 style="font-size:26px;margin:8px 0 32px">{{ t.bali.whyBali.title }}</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Card" hint-size="100%,180px" tone="soft"><span class="mei-eyebrow">{{ t.bali.whyBali.culture }}</span><h3 style="font-size:17px;margin:8px 0">{{ t.bali.whyBali.cultureTitle }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.bali.whyBali.cultureBody }}</p></x-import>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Card" hint-size="100%,180px" tone="soft"><span class="mei-eyebrow">{{ t.bali.whyBali.nature }}</span><h3 style="font-size:17px;margin:8px 0">{{ t.bali.whyBali.natureTitle }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.bali.whyBali.natureBody }}</p></x-import>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Card" hint-size="100%,180px" tone="soft"><span class="mei-eyebrow">{{ t.bali.whyBali.people }}</span><h3 style="font-size:17px;margin:8px 0">{{ t.bali.whyBali.peopleTitle }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.bali.whyBali.peopleBody }}</p></x-import>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:0 24px 64px">
+<div style="background:var(--surface-inverse);border-radius:16px;padding:40px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:center;color:var(--cream)">
+<div><div style="font-family:var(--font-display);font-size:32px">13.5%</div><div style="font-size:13px;color:rgba(253,250,246,0.75)">{{ t.bali.market.cagr }}</div></div>
+<div><div style="font-family:var(--font-display);font-size:32px">#1</div><div style="font-size:13px;color:rgba(253,250,246,0.75)">{{ t.bali.market.rank }}</div></div>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Button" hint-size="180px,48px" variant="inverse" href="contact.dc.html">{{ t.bali.market.cta }}</x-import>
+</div>
+</section>
+
+<section style="background:var(--surface-sunken);padding:64px 24px">
+<div style="max-width:1160px;margin:0 auto">
+<span class="mei-eyebrow">{{ t.bali.pillars.eyebrow }}</span>
+<h2 style="font-size:26px;margin:8px 0 32px">{{ t.bali.pillars.title }}</h2>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Card" hint-size="100%,140px"><h3 style="font-size:16px;margin-bottom:6px">{{ t.bali.pillar1 }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.bali.pillar1Body }}</p></x-import>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Card" hint-size="100%,140px"><h3 style="font-size:16px;margin-bottom:6px">{{ t.bali.pillar2 }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.bali.pillar2Body }}</p></x-import>
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Card" hint-size="100%,140px"><h3 style="font-size:16px;margin-bottom:6px">{{ t.bali.pillar3 }}</h3><p style="font-size:14px;color:var(--text-body)">{{ t.bali.pillar3Body }}</p></x-import>
+</div>
+</div>
+</section>
+
+<section id="plans" style="max-width:1160px;margin:0 auto;padding:64px 24px">
+<span class="mei-eyebrow">{{ t.bali.plans.eyebrow }}</span>
+<h2 style="font-size:26px;margin:8px 0 32px">{{ t.bali.plans.title }}</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="border-radius:12px;overflow:hidden;border:1px solid var(--border-subtle)">
+<div style="background:var(--terracotta-500);color:var(--white);padding:12px 20px;font-size:12px;font-weight:500;letter-spacing:0.06em">{{ t.bali.planA.tag }}</div>
+<div style="padding:20px"><h3 style="font-size:17px;margin-bottom:8px">{{ t.bali.planA.title }}</h3><p style="font-size:14px;color:var(--text-body);margin-bottom:10px">{{ t.bali.planA.body }}</p><p style="font-size:13px;color:var(--text-muted)">{{ t.bali.planA.summary }}</p></div>
+</div>
+<div style="border-radius:12px;overflow:hidden;border:1px solid var(--border-subtle)">
+<div style="background:var(--ink-900);color:var(--cream);padding:12px 20px;font-size:12px;font-weight:500;letter-spacing:0.06em">{{ t.bali.planB.tag }}</div>
+<div style="padding:20px"><h3 style="font-size:17px;margin-bottom:8px">{{ t.bali.planB.title }}</h3><p style="font-size:14px;color:var(--text-body);margin-bottom:10px">{{ t.bali.planB.body }}</p><p style="font-size:13px;color:var(--text-muted)">{{ t.bali.planB.summary }}</p></div>
+</div>
+</div>
+</section>
+
+<section style="background:var(--surface-sunken);padding:64px 24px">
+<div style="max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px">
+<div><span class="mei-eyebrow">{{ t.bali.audience.eyebrow }}</span><h2 style="font-size:22px;margin:8px 0 12px">{{ t.bali.audience.title }}</h2><p style="font-size:15px;color:var(--text-body);line-height:1.6">{{ t.bali.audience.body }}</p></div>
+<div>
+<span class="mei-eyebrow">{{ t.bali.safety.eyebrow }}</span><h2 style="font-size:22px;margin:8px 0 16px">{{ t.bali.safety.title }}</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+<div><h4 style="font-size:14px;margin-bottom:4px">{{ t.bali.safety1 }}</h4><p style="font-size:13px;color:var(--text-muted)">{{ t.bali.safety1Body }}</p></div>
+<div><h4 style="font-size:14px;margin-bottom:4px">{{ t.bali.safety2 }}</h4><p style="font-size:13px;color:var(--text-muted)">{{ t.bali.safety2Body }}</p></div>
+<div><h4 style="font-size:14px;margin-bottom:4px">{{ t.bali.safety3 }}</h4><p style="font-size:13px;color:var(--text-muted)">{{ t.bali.safety3Body }}</p></div>
+<div><h4 style="font-size:14px;margin-bottom:4px">{{ t.bali.safety4 }}</h4><p style="font-size:13px;color:var(--text-muted)">{{ t.bali.safety4Body }}</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section style="max-width:1160px;margin:0 auto;padding:64px 24px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.CTABanner" hint-size="100%,240px" title="{{ t.bali.finalCta.title }}" body="{{ t.bali.finalCta.body }}" action="{{ t.cta.contactUs }}" href="contact.dc.html"></x-import>
+</section>
+
+<footer style="background:var(--surface-inverse);color:rgba(253,250,246,0.78);padding:64px 24px 24px">
+<div style="max-width:1160px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px;justify-content:space-between">
+<div style="display:flex;flex-direction:column;gap:24px;max-width:300px">
+<x-import component-from-global-scope="MiraiEduventureDesignSystem_fe8ae7.Logo" hint-size="90px,26px" variant="horizontal-white" basePath="assets/logo" style="height:26px"></x-import>
+<p style="font-size:13px;line-height:1.6;color:rgba(253,250,246,0.7)">{{ t.footer.tagline }}</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.5)">{{ t.footer.programs }}</span>
+<a href="services-vep.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Virtual Exchange Program</a>
+<a href="services-saga.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Exchange Program in Saga &amp; Fukuoka</a>
+<a href="services-bali.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Edutourism Program in Bali</a>
+<a href="services-language.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Language Program</a>
+<a href="services-customized.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">Customized Training Program</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.5)">{{ t.footer.company }}</span>
+<a href="about.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.about }}</a>
+<a href="partners.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.partners }}</a>
+<a href="voices.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.voices }}</a>
+<a href="news.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.news }}</a>
+<a href="contact.dc.html" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">{{ t.footer.contact }}</a>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px;max-width:260px">
+<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(253,250,246,0.5)">{{ t.footer.getInTouch }}</span>
+<a href="mailto:info@miraieduventure.com" style="border:none;color:rgba(253,250,246,0.86);font-size:14px">info@miraieduventure.com</a>
+<span style="color:rgba(253,250,246,0.86);font-size:14px">+62 813 8532 4750</span>
+<span style="color:rgba(253,250,246,0.65);font-size:13px;line-height:1.5">Maison De Wisteria Baldwin 1-10, Kel. Ujung Menteng, Kec. Cakung, East Jakarta 13960</span>
+</div>
+</div>
+<div style="max-width:1160px;margin:24px auto 0;padding-top:16px;border-top:1px solid rgba(253,250,246,0.14);font-size:13px;color:rgba(253,250,246,0.55);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+<span>{{ t.footer.copyright }}</span><span>{{ t.footer.foundedLine }}</span>
+</div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const T = {
+en: {
+  nav:{services:"Services",partners:"Partners",voices:"Voices",about:"About",news:"News",contact:"Contact"},
+  footer:{programs:"Programs",company:"Company",getInTouch:"Get in touch",about:"About",partners:"Partners",voices:"Voices",news:"News",contact:"Contact",
+    tagline:"We create real, human connections across borders — not tourism, but real connection — that open students' worlds and give them the chance to change their course.",
+    copyright:"© 2026 Mirai Eduventure Indonesia. All rights reserved.",foundedLine:"Founded 2023 · Jakarta"},
+  cta:{contactUs:"Contact us"},
+  bali:{crumb:"Home · Services · Edutourism in Bali",eyebrow:"Program 03 · For institutions",
+    headline1:"Tourism is about seeing.",headline2:"Edutourism is about feeling, thinking, and changing.",
+    sub:"Real learning, for students in Bali. A 7-day PBL / service learning program for Japanese high schools.",
+    ctaQuote:"Request a quote",ctaPlans:"See program plans",
+    badgeLocation:"Indonesia · Bali",badgeDuration:"6 nights / 7 days",badgeGroup:"20–30 students",
+    whyBali:{eyebrow:"Why Bali",title:"Culture. Nature. People.",
+      culture:"Culture",cultureTitle:"1,000 years of continuous Hindu culture.",cultureBody:"Living traditions students can observe, participate in, and reflect on.",
+      nature:"Nature",natureTitle:"UNESCO World Heritage Subak.",natureBody:"The Subak irrigation system — a millennia-old model of community and sustainability.",
+      people:"People",peopleTitle:"The warmth of Balinese hospitality.",peopleBody:"Learning happens in relationships. Bali's people carry the program."},
+    market:{cagr:"Compound annual growth of the Asia-Pacific edutourism market.",rank:"Asia-Pacific is the world's largest edutourism market.",cta:"Request a proposal"},
+    pillars:{eyebrow:"Three pillars of learning",title:"Learning that leaves a mark."},
+    pillar1:"Project-Based Learning",pillar1Body:"Students take on a real question they research and produce work around, together.",
+    pillar2:"Service Learning",pillar2Body:"Meaningful contribution — not observation. Real work with real communities.",
+    pillar3:"Structured Reflection",pillar3Body:"Guided sessions that turn a trip into a change in how a student sees the world.",
+    plans:{eyebrow:"Program structure",title:"Choose the plan that fits your school."},
+    planA:{tag:"RECOMMENDED",title:"Plan A — with PBL",body:"A 7-day itinerary built around a project-based learning arc, with service learning and structured reflection.",
+      summary:"Arrival & orientation → Cultural immersion → Research & PBL kickoff → Field visits & service → Production → Presentation & reflection → Departure."},
+    planB:{tag:"CLASSIC",title:"Plan B — without PBL",body:"A 7-day cultural & service-learning experience for schools who prefer a lighter academic frame.",
+      summary:"Cultural immersion, service activities, reflection sessions — a strong first exposure without the PBL cycle."},
+    audience:{eyebrow:"Who it's for",title:"Designed for Japanese high schools.",body:"Optimised for groups of 20–30 students on a 6-night / 7-day itinerary. We work with your school on the academic frame, learning objectives, and reflection design."},
+    safety:{eyebrow:"Safety & support",title:"Peace of mind, built in."},
+    safety1:"Emergency response",safety1Body:"A clear escalation path for every scenario, from illness to weather.",
+    safety2:"Medical & safety management",safety2Body:"On-the-ground protocols and trusted local medical relationships.",
+    safety3:"Chaperone structure",safety3Body:"Ratios and roles that give teachers real support during the program.",
+    safety4:"Parent support",safety4Body:"Communication channels that keep families informed without overloading teachers.",
+    finalCta:{title:"A new option for your school's overseas study program.",body:"Send us your school's calendar and objectives — we'll build a proposal around them."}},
+},
+ja: {
+  nav:{services:"サービス",partners:"パートナー校",voices:"参加者の声",about:"私たちについて",news:"ニュース",contact:"お問い合わせ"},
+  footer:{programs:"プログラム",company:"会社情報",getInTouch:"お問い合わせ",about:"私たちについて",partners:"パートナー校",voices:"参加者の声",news:"ニュース",contact:"お問い合わせ",
+    tagline:"国境を越えた本物の人と人とのつながり。観光ではない、本当の出会いを届けます。生徒の視野を広げ、さまざまな人生の選択肢を。",
+    copyright:"© 2026 Mirai Eduventure Indonesia. All rights reserved.",foundedLine:"2023年設立 · ジャカルタ"},
+  cta:{contactUs:"お問い合わせ"},
+  bali:{crumb:"ホーム · サービス · Edutourism Program in Bali",eyebrow:"プログラム 03 · 教育機関向け",
+    headline1:"観光は「見ること」。",headline2:"エデュツーリズムは「感じ、考え、変わること」。",
+    sub:"バリでの、生徒たちのための本物の学び。日本の高校向けの7日間 PBL / サービスラーニング プログラム。",
+    ctaQuote:"お見積依頼",ctaPlans:"プランを見る",
+    badgeLocation:"インドネシア · バリ",badgeDuration:"6泊7日",badgeGroup:"20〜30名",
+    whyBali:{eyebrow:"なぜバリか",title:"文化・自然・人。",
+      culture:"文化",cultureTitle:"1,000年続くヒンドゥー文化。",cultureBody:"生徒が観察し、参加し、振り返ることのできる、生きた伝統。",
+      nature:"自然",natureTitle:"UNESCO世界遺産スバック。",natureBody:"何千年も続くスバック灌漑システム——コミュニティと持続可能性の原型。",
+      people:"人",peopleTitle:"バリの人々のあたたかいホスピタリティ。",peopleBody:"学びは関係性の中で生まれる。プログラムを支えているのはバリの人々です。"},
+    market:{cagr:"アジア太平洋地域のエデュツーリズム市場の年平均成長率。",rank:"アジア太平洋は世界最大のエデュツーリズム市場。",cta:"ご提案書を依頼する"},
+    pillars:{eyebrow:"学びの3つの柱",title:"深く残る学びを。"},
+    pillar1:"プロジェクトベース学習(PBL)",pillar1Body:"生徒たちが本物の問いに取り組み、共にリサーチし、成果物を作り上げます。",
+    pillar2:"サービスラーニング",pillar2Body:"観察ではなく、意味のある貢献。実際のコミュニティと共に取り組む本物の活動。",
+    pillar3:"構造化された振り返り",pillar3Body:"旅を「世界の見え方の変化」へと変える、ガイド付きセッション。",
+    plans:{eyebrow:"プログラム構成",title:"貴校に合ったプランを選択。"},
+    planA:{tag:"おすすめ",title:"プラン A ——PBL 付き",body:"プロジェクトベース学習を中心に、サービスラーニングと構造化された振り返りを組み込んだ7日間のプログラム。",
+      summary:"到着とオリエンテーション → 文化への浸り → リサーチと PBL キックオフ → フィールドとサービス → 制作 → 発表と振り返り → 出発。"},
+    planB:{tag:"クラシック",title:"プラン B ——PBL なし",body:"より軽やかな学術フレームを希望される学校向け、7日間の文化・サービスラーニング体験。",
+      summary:"文化への浸り、サービス活動、振り返りセッション—— PBL サイクルなしの、力強い最初の体験。"},
+    audience:{eyebrow:"対象",title:"日本の高校のために設計。",body:"6泊7日、20〜30名の生徒グループに最適化。学術フレーム、学習目標、振り返り設計を貴校と共に組み立てます。"},
+    safety:{eyebrow:"安全とサポート",title:"安心を、仕組みとして。"},
+    safety1:"緊急時対応",safety1Body:"病気から天候まで、あらゆる場面に対応する明確なエスカレーションフロー。",
+    safety2:"医療・安全管理",safety2Body:"現地プロトコルと信頼できる医療機関との連携。",
+    safety3:"引率体制",safety3Body:"先生方を現場でしっかり支える人員配置と役割。",
+    safety4:"保護者サポート",safety4Body:"ご家族に情報を届けつつ、先生方に負担をかけないコミュニケーションチャネル。",
+    finalCta:{title:"貴校の海外研修プログラムに、新しい選択肢を。",body:"貴校のカレンダーと目的をお送りください——それに合わせたご提案をお作りします。"}},
+},
+};
+class Component extends DCLogic {
+  state = { lang: (typeof localStorage !== 'undefined' && localStorage.getItem('mei-lang')) || 'en', menuOpen: false };
+  setLang(l){ try{ localStorage.setItem('mei-lang', l); }catch(e){} this.setState({ lang: l }); }
+  toggleMenu(){ this.setState(s => ({ menuOpen: !s.menuOpen })); }
+  renderVals() {
+    const lang = this.state.lang; const t = T[lang];
+    return {
+      t, lang, setLangEn: () => this.setLang('en'), setLangJa: () => this.setLang('ja'),
+      langBg: { en: lang === 'en' ? 'var(--terracotta-500)' : 'transparent', ja: lang === 'ja' ? 'var(--terracotta-500)' : 'transparent' },
+      langColor: { en: lang === 'en' ? 'var(--white)' : 'var(--text-body)', ja: lang === 'ja' ? 'var(--white)' : 'var(--text-body)' },
+      menuOpenDisplay: this.state.menuOpen ? 'flex' : 'none', toggleMenu: () => this.toggleMenu(),
+    };
+  }
+}
+</script>
+</body>
+</html>
