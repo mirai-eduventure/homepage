@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Contact — Mirai Eduventure Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20260817-4"/>
+  <style>
+    .contact-grid{
+      display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--s-3xl); align-items: start;
+    }
+    @media (max-width: 860px){ .contact-grid{ grid-template-columns: 1fr; } }
+    .form-card{
+      background: var(--cream-white); border: 0.5px solid var(--line-strong);
+      border-radius: var(--r-card); padding: var(--s-2xl);
+      display: flex; flex-direction: column; gap: var(--s-md);
+    }
+    .form-row{ display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md); }
+    @media (max-width: 620px){ .form-row{ grid-template-columns: 1fr; } }
+    .info-card{
+      background: var(--brown-dark); color: var(--cream-white);
+      border-radius: var(--r-card); padding: var(--s-xl);
+      display: flex; flex-direction: column; gap: var(--s-lg);
+    }
+    .info-card h3, .info-card p{ color: var(--cream-white); }
+    .info-block{
+      display: flex; flex-direction: column; gap: 6px;
+      padding-bottom: var(--s-md); border-bottom: 1px solid rgba(253,250,246,0.14);
+    }
+    .info-block:last-child{ border-bottom: 0; padding-bottom: 0; }
+    .info-block .k{ font-size: 11px; color: rgba(253,250,246,0.6); letter-spacing: 0.06em; font-weight: 500; }
+    .info-block a{ color: var(--cream-white); font-size: 15px; }
+    .info-block a:hover{ color: var(--terra-light); text-decoration: none; }
+
+    .success-msg{
+      background: var(--id); color: var(--cream-white);
+      border-radius: var(--r-btn); padding: var(--s-md);
+      font-size: 14px; display: none;
+    }
+    .success-msg.on{ display: block; }
+
+    .map{
+      aspect-ratio: 16/9; border-radius: var(--r-card); overflow: hidden;
+      background: var(--cream-dark);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .map .placeholder{
+      color: var(--ink-mid); font-size: 13px; letter-spacing: 0.04em; text-align: center;
+    }
+    .map::before{
+      content:""; position: absolute; inset: 0;
+      background:
+        linear-gradient(0deg, transparent 24%, rgba(92,42,30,0.06) 25%, rgba(92,42,30,0.06) 26%, transparent 27%),
+        linear-gradient(90deg, transparent 24%, rgba(92,42,30,0.06) 25%, rgba(92,42,30,0.06) 26%, transparent 27%);
+      background-size: 40px 40px;
+    }
+    .map .pin{
+      position: absolute; z-index: 2;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--terracotta); border: 3px solid var(--cream-white);
+      box-shadow: 0 4px 12px rgba(92,42,30,0.3);
+    }
+    .map .pin::after{
+      content:""; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+      width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent;
+      border-top: 8px solid var(--terracotta);
+    }
+    .map .pinbox{
+      position: absolute; z-index: 3; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .map .pinlabel{
+      background: var(--cream-white); color: var(--brown-dark);
+      padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 500;
+      box-shadow: 0 4px 12px rgba(92,42,30,0.15);
+    }
+  </style>
+</head>
+<body data-active="contact" data-base="./">
+  <script src="assets/image_slot.js"></script>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="path"><a href="index.html">Home</a> · Contact</div>
+      <h1 class="display" style="color: var(--brown-dark); margin-top: 4px;" data-i18n="contact.title">Contact</h1>
+      <p class="muted" style="font-size: 17px; max-width: 640px;" data-i18n="contact.sub">
+        Whether you have a question, want program materials, or need a proposal tailored to your school or organization — we'd love to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Form -->
+        <form class="form-card" id="contact-form" action="https://formspree.io/f/REPLACE_WITH_ENDPOINT" method="POST">
+          <span class="eyebrow" data-i18n="contact.form.eyebrow">Send us a message</span>
+          <h2 style="color: var(--brown-dark); margin-top: 6px; font-size: 22px;" data-i18n="contact.form.title">Tell us about your inquiry.</h2>
+
+          <div class="success-msg" id="success" data-i18n="contact.form.success">
+            Thank you — your message has been sent. We'll get back to you soon.
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="name">Name <span class="req">*</span></label>
+              <input class="input" id="name" name="name" type="text" required placeholder="Your full name"/>
+            </div>
+            <div class="form-field">
+              <label for="email">Email <span class="req">*</span></label>
+              <input class="input" id="email" name="email" type="email" required placeholder="you@example.com"/>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="org">Organization <span class="muted" style="font-weight: 400;">(optional)</span></label>
+            <input class="input" id="org" name="organization" type="text" placeholder="School, company, or institution"/>
+          </div>
+
+          <div class="form-field">
+            <label for="inquiry">Inquiry type <span class="req">*</span></label>
+            <select class="select" id="inquiry" name="inquiry_type" required>
+              <option value="" disabled selected>Choose a program or topic…</option>
+              <option>Virtual Exchange Program</option>
+              <option>Exchange Program in Saga &amp; Fukuoka</option>
+              <option>Edutourism Program in Bali</option>
+              <option>Language Program</option>
+              <option>Customized Training Program</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label for="message">Message <span class="req">*</span></label>
+            <textarea class="textarea" id="message" name="message" required placeholder="Tell us a bit about who you are, what you're looking for, and any timeline we should know about."></textarea>
+          </div>
+
+          <p class="caption">
+            By submitting, you agree to be contacted by Mirai Eduventure Indonesia about your inquiry. We won't share your details with anyone else.
+          </p>
+
+          <div class="row" style="gap: 12px; margin-top: 4px;">
+            <button type="submit" class="btn btn-primary btn-lg">Send message <span class="arrow">→</span></button>
+            <a href="/cdn-cgi/l/email-protection#036a6d656c436e6a71626a66677675666d777671662d606c6e" class="btn btn-ghost">Or email us directly</a>
+          </div>
+        </form>
+
+        <!-- Info + Map -->
+        <div class="stack-lg">
+          <div class="info-card">
+            <div>
+              <span class="eyebrow dark" data-i18n="contact.info.eyebrow">Direct contact</span>
+              <h3 style="margin-top: 8px; font-size: 20px;" data-i18n="contact.info.title">Reach us anytime.</h3>
+            </div>
+            <div class="info-block">
+              <span class="k" data-i18n="contact.info.email">EMAIL</span>
+              <a href="/cdn-cgi/l/email-protection#741d1a121b34191d06151d11100102111a000106115a171b19"><span class="__cf_email__" data-cfemail="6e070008012e03071c0f070b0a1b180b001a1b1c0b400d0103">[email&#160;protected]</span></a>
+            </div>
+            <div class="info-block">
+              <span class="k" data-i18n="contact.info.phone">PHONE</span>
+              <a href="tel:+6281385324750">+62 813 8532 4750</a>
+            </div>
+            <div class="info-block">
+              <span class="k" data-i18n="contact.info.office">OFFICE</span>
+              <p style="font-size: 14px; color: rgba(253,250,246,0.9); line-height: 1.6;">
+                Maison De Wisteria Baldwin 1-10<br/>
+                Kel. Ujung Menteng, Kec. Cakung<br/>
+                East Jakarta 13960<br/>
+                Indonesia
+              </p>
+            </div>
+            <div class="info-block">
+              <span class="k" data-i18n="contact.info.hours">HOURS</span>
+              <p style="font-size: 14px; color: rgba(253,250,246,0.9);">Mon–Fri · 9:00 – 18:00 WIB</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="map">
+              <div class="pinbox">
+                <div class="pinlabel">MEI · East Jakarta</div>
+                <div class="pin"></div>
+              </div>
+              <div class="placeholder" style="position: absolute; bottom: 10px; right: 12px; opacity: 0.5;">MAP · UJUNG MENTENG</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Simple wire-up: intercept submit, show a success state (form endpoint TBD).
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('success');
+    form.addEventListener('submit', function(e){
+      // If action still has the REPLACE placeholder, prevent submit and just show success visually.
+      if (form.action.includes('REPLACE_WITH_ENDPOINT')) {
+        e.preventDefault();
+        success.classList.add('on');
+        form.querySelectorAll('input, textarea, select').forEach(el => el.value = '');
+        // gently scroll the page to bring success into view without scrollIntoView
+        const y = success.getBoundingClientRect().top + window.scrollY - 120;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+      // Otherwise, let it submit to the real endpoint.
+    });
+  </script>
+  <script src="assets/i18n.js?v=20260817-4"></script>
+  <script src="assets/chrome.js?v=20260817-4"></script>
+</body>
+</html>

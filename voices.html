@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Real Voices — Mirai Eduventure Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20260817-4"/>
+  <style>
+    /* ------- Hero ------- */
+    .voices-hero{
+      position: relative; overflow: hidden;
+      background:
+        linear-gradient(90deg,
+          rgba(253,250,246,0.96) 0%,
+          rgba(253,250,246,0.88) 45%,
+          rgba(253,250,246,0.55) 75%,
+          rgba(253,250,246,0.25) 100%),
+        url('assets/hero-voices-bg.jpg') center right / cover no-repeat;
+      padding: var(--s-4xl) 0 var(--s-3xl);
+      min-height: 420px;
+      display: flex; align-items: center;
+    }
+    .voices-hero .container{ position: relative; z-index: 2; max-width: 780px; }
+    @media (max-width: 720px){
+      .voices-hero{
+        background:
+          linear-gradient(180deg,
+            rgba(253,250,246,0.94) 0%,
+            rgba(253,250,246,0.88) 100%),
+          url('assets/hero-voices-bg.jpg') center / cover no-repeat;
+      }
+    }
+    .voices-hero h1{
+      font-size: clamp(32px, 5vw, 46px);
+      color: var(--brown-dark);
+      letter-spacing: -0.02em; line-height: 1.1;
+      margin: 12px 0 16px;
+      text-shadow: 0 2px 20px rgba(253,250,246,0.9);
+    }
+    .voices-hero p{
+      font-size: 18px; line-height: 1.6; color: var(--ink-mid);
+      max-width: 560px;
+      text-shadow: 0 1px 12px rgba(253,250,246,0.85);
+    }
+    .voices-hero .quick-stats{
+      display: flex; gap: var(--s-2xl); margin-top: var(--s-xl);
+      font-size: 13px; color: var(--ink-mid);
+    }
+    .voices-hero .quick-stats strong{ color: var(--brown-dark); font-weight: 500; }
+
+    /* ------- Filter bar ------- */
+    .filter-bar{
+      position: sticky; top: 68px; z-index: 20;
+      background: var(--cream-white);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+    }
+    .filter-bar .container{ display: flex; gap: var(--s-xl); align-items: center; flex-wrap: wrap; }
+    .filter-group{
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; color: var(--ink-mid);
+      font-weight: 500; letter-spacing: 0.04em;
+    }
+    .filter-group .label{
+      text-transform: uppercase; font-size: 11px; color: var(--ink-soft);
+      letter-spacing: 0.08em;
+    }
+    .chip{
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+      font-size: 13px; font-weight: 500; color: var(--ink-mid);
+      font-family: inherit;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .chip:hover{ border-color: var(--terracotta); color: var(--terracotta); }
+    .chip.on{
+      background: var(--brown-dark); color: var(--cream-white); border-color: var(--brown-dark);
+    }
+    .chip .count{
+      background: rgba(0,0,0,0.12);
+      padding: 1px 7px; border-radius: 10px;
+      font-size: 11px; color: inherit;
+    }
+    .chip.on .count{ background: rgba(253,250,246,0.2); }
+
+    .result-count{
+      margin-left: auto;
+      font-size: 12px; color: var(--ink-mid);
+    }
+    .result-count strong{ color: var(--brown-dark); font-weight: 500; }
+
+    /* ------- Section headings ------- */
+    .voices-section{ padding: var(--s-3xl) 0 var(--s-4xl); }
+    .voices-section.alt{ background: var(--cream-dark); }
+    .voices-section .section-head{
+      display: flex; align-items: baseline; gap: var(--s-md);
+      margin-bottom: var(--s-xl);
+      justify-content: space-between; flex-wrap: wrap;
+    }
+    .voices-section h2{
+      font-size: 26px; color: var(--brown-dark);
+      letter-spacing: -0.01em; font-weight: 500;
+    }
+    .voices-section .section-head .num{
+      font-size: 12px; letter-spacing: 0.06em; color: var(--ink-mid); font-weight: 500;
+      background: var(--terra-pale); padding: 4px 12px; border-radius: 100px;
+    }
+
+    /* ------- Card grid ------- */
+    .voice-grid{
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-lg);
+    }
+    @media (max-width: 900px){ .voice-grid{ grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 620px){ .voice-grid{ grid-template-columns: 1fr; } }
+
+    .voice-card{
+      background: var(--cream-white);
+      border: 0.5px solid var(--line-strong);
+      border-radius: var(--r-card);
+      padding: var(--s-xl);
+      display: flex; flex-direction: column; gap: var(--s-md);
+      position: relative;
+      transition: border-color .15s ease, transform .15s ease;
+    }
+    .voice-card:hover{ border-color: var(--terracotta); transform: translateY(-2px); }
+    .voice-card .badges{
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .voice-card .pgm-badge{
+      font-size: 10px; letter-spacing: 0.08em; font-weight: 500;
+      padding: 3px 10px; border-radius: 100px;
+    }
+    .voice-card .pgm-vep{
+      background: rgba(44,74,124,0.10); color: var(--jp);
+    }
+    .voice-card .pgm-saga{
+      background: var(--terra-pale); color: var(--brown-dark);
+    }
+    .voice-card .type-badge{
+      font-size: 10px; letter-spacing: 0.08em; font-weight: 500;
+      padding: 3px 10px; border-radius: 100px;
+      background: transparent; border: 1px solid var(--line-strong);
+      color: var(--ink-mid);
+    }
+    .voice-card .type-student{ color: var(--terracotta); border-color: var(--terracotta); }
+    .voice-card .type-parent{ color: var(--brown-mid); border-color: var(--brown-mid); }
+    .voice-card blockquote{
+      margin: 0; padding: 0;
+      font-size: 15px; line-height: 1.65; color: var(--brown-dark);
+    }
+    .voice-card blockquote::before{
+      content: "\201C";
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 42px; line-height: 0.6; color: var(--terracotta);
+      display: block; margin-bottom: 4px; font-weight: 500;
+    }
+    .voice-card .attribution{
+      display: flex; align-items: center; gap: var(--s-md);
+      padding-top: var(--s-md);
+      border-top: 1px solid var(--line);
+      margin-top: auto;
+    }
+    .voice-card .avatar{
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--terra-pale);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--brown-dark); font-weight: 500; font-size: 15px;
+      flex-shrink: 0; overflow: hidden;
+      border: 1px solid var(--line-strong);
+    }
+    .voice-card .avatar image-slot{ width: 100%; height: 100%; }
+    .voice-card .meta{ display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .voice-card .name{
+      font-size: 14px; font-weight: 500; color: var(--brown-dark);
+      line-height: 1.2;
+    }
+    .voice-card .batch{
+      font-size: 11px; color: var(--ink-mid);
+      letter-spacing: 0.02em;
+    }
+
+    /* ------- Placeholder styling ------- */
+    .voice-card.is-placeholder{
+      opacity: 0.72;
+      background: repeating-linear-gradient(
+        135deg,
+        var(--cream-white) 0 20px,
+        var(--cream-dark) 20px 21px);
+      border-style: dashed;
+    }
+    .voice-card.is-placeholder::before{
+      content: "DO NOT PUBLISH";
+      position: absolute;
+      top: 12px; right: 12px;
+      background: var(--vn); color: var(--cream-white);
+      font-size: 9px; letter-spacing: 0.14em; font-weight: 500;
+      padding: 3px 8px; border-radius: 4px;
+      z-index: 2;
+    }
+    .voice-card.is-placeholder blockquote{ color: var(--ink-mid); font-style: italic; }
+    .voice-card.is-placeholder .name{ color: var(--ink-mid); }
+
+    /* ------- Empty state (when filter matches nothing) ------- */
+    .empty-state{
+      text-align: center; padding: var(--s-3xl) var(--s-xl);
+      background: var(--cream-white);
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--r-card);
+      color: var(--ink-mid);
+    }
+    .empty-state h3{
+      font-size: 18px; color: var(--brown-dark); margin-bottom: 6px;
+    }
+    .empty-state p{ font-size: 14px; }
+
+    /* ------- Growing note ------- */
+    .growing-note{
+      background: var(--terra-pale);
+      border-radius: var(--r-card);
+      padding: var(--s-xl);
+      display: grid; grid-template-columns: auto 1fr; gap: var(--s-md);
+      align-items: center;
+      margin-top: var(--s-xl);
+    }
+    @media (max-width: 620px){ .growing-note{ grid-template-columns: 1fr; } }
+    .growing-note .icon{
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--terracotta); color: var(--cream-white);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .growing-note h3{
+      font-size: 15px; color: var(--brown-dark); margin: 0 0 4px;
+    }
+    .growing-note p{ font-size: 13px; color: var(--ink-mid); margin: 0; }
+
+    /* ------- CTA ------- */
+    .cta-banner{
+      background: linear-gradient(135deg, var(--terracotta) 0%, var(--brown-mid) 100%);
+      color: var(--cream-white);
+      border-radius: 20px;
+      padding: var(--s-3xl);
+      display: grid; grid-template-columns: 1.3fr 0.7fr;
+      gap: var(--s-xl); align-items: center;
+    }
+    @media (max-width: 860px){ .cta-banner{ grid-template-columns: 1fr; } }
+    .cta-banner h2{
+      color: var(--cream-white);
+      font-size: 26px; letter-spacing: -0.01em; line-height: 1.2;
+      font-weight: 500;
+    }
+    .cta-banner p{ color: rgba(253,250,246,0.88); margin-top: 8px; font-size: 15px; }
+    .cta-banner .actions{ display: flex; gap: var(--s-md); justify-content: flex-end; }
+    @media (max-width: 860px){ .cta-banner .actions{ justify-content: flex-start; } }
+    .cta-banner .btn-primary{
+      background: var(--cream-white); color: var(--terracotta); border-color: var(--cream-white);
+    }
+    .cta-banner .btn-primary:hover{
+      background: var(--cream-dark); border-color: var(--cream-dark); color: var(--terracotta);
+    }
+  </style>
+</head>
+<body data-active="voices" data-base="./">
+  <script src="assets/image_slot.js"></script>
+
+  <!-- ============ HERO ============ -->
+  <section class="voices-hero">
+    <div class="container">
+      <span class="eyebrow" data-i18n="voices.eyebrow">Testimonials</span>
+      <h1 data-i18n="voices.headline">Real Voices from Participants &amp; Parents</h1>
+      <p data-i18n="voices.sub">Hear directly from the students and families who've been part of our programs. Their words, in their own voice — the honest experience of what our programs meant to them.</p>
+      <div class="quick-stats">
+        <div><strong id="stat-total">—</strong> voices in total</div>
+        <div><strong id="stat-real">—</strong> published</div>
+        <div><strong id="stat-programs">2</strong> programs</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FILTER BAR ============ -->
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-group">
+        <span class="label" data-i18n="voices.filter.program">Program</span>
+        <button class="chip on" data-filter="program" data-value="all"><span data-i18n="voices.filter.all">All</span> <span class="count" data-count="program:all">0</span></button>
+        <button class="chip" data-filter="program" data-value="vep">VEP <span class="count" data-count="program:vep">0</span></button>
+        <button class="chip" data-filter="program" data-value="saga"><span data-i18n="voices.filter.saga">Saga &amp; Fukuoka</span> <span class="count" data-count="program:saga">0</span></button>
+      </div>
+      <div class="filter-group">
+        <span class="label" data-i18n="voices.filter.voice">Voice</span>
+        <button class="chip on" data-filter="type" data-value="all"><span data-i18n="voices.filter.all">All</span> <span class="count" data-count="type:all">0</span></button>
+        <button class="chip" data-filter="type" data-value="student"><span data-i18n="voices.filter.student">Student</span> <span class="count" data-count="type:student">0</span></button>
+        <button class="chip" data-filter="type" data-value="parent"><span data-i18n="voices.filter.parent">Parent</span> <span class="count" data-count="type:parent">0</span></button>
+      </div>
+      <div class="result-count"><strong id="visible-count">0</strong> showing</div>
+    </div>
+  </div>
+
+  <!-- ============ STUDENT VOICES ============ -->
+  <section class="voices-section" id="student-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="voices.students.eyebrow">In their own words</span>
+          <h2 style="margin-top: 10px;" data-i18n="voices.students.title">Student Voices</h2>
+        </div>
+        <span class="num" id="student-num">— voices</span>
+      </div>
+      <div class="voice-grid" id="student-grid"></div>
+      <div class="empty-state" id="student-empty" hidden>
+        <h3 data-i18n="voices.students.empty">No student voices match this filter yet.</h3>
+        <p data-i18n="voices.students.emptyBody">Try clearing the filter, or check back after our next program batch completes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PARENT VOICES ============ -->
+  <section class="voices-section alt" id="parent-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="voices.parents.eyebrow">From the families</span>
+          <h2 style="margin-top: 10px;" data-i18n="voices.parents.title">Parent Voices</h2>
+        </div>
+        <span class="num" id="parent-num">— voices</span>
+      </div>
+      <div class="voice-grid" id="parent-grid"></div>
+      <div class="empty-state" id="parent-empty" hidden>
+        <h3 data-i18n="voices.parents.empty">No parent voices match this filter yet.</h3>
+        <p data-i18n="voices.parents.emptyBody">We're just starting to collect testimonials from parents. Check back after our next program batch.</p>
+      </div>
+
+      <!-- Growing collection note -->
+      <div class="growing-note">
+        <div class="icon">✚</div>
+        <div>
+          <h3 data-i18n="voices.growing.title">This page grows with every program.</h3>
+          <p data-i18n="voices.growing.body">New voices are added after each batch completes — from both students and their families. If you took part in a program and want to share your story, we'd love to hear from you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section-sm">
+    <div class="container">
+      <div class="cta-banner">
+        <div>
+          <span class="eyebrow" style="background: rgba(253,250,246,0.14); color: var(--cream-white);" data-i18n="voices.finalCta.eyebrow">Talk to us</span>
+          <h2 style="margin-top: 10px;" data-i18n="voices.finalCta.title">Curious what this experience could be for your child?</h2>
+          <p data-i18n="voices.finalCta.body">We're happy to talk through the programs, timelines, and what students and families can expect — no pressure, just a real conversation.</p>
+        </div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="contact.html">Contact us <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DATA + RENDER ============ -->
+  <script>
+    /* ─────────────────────────────────────────────────────────
+       VOICES DATA COLLECTION
+       Add / edit entries here. Structure:
+       {
+         program:  'vep' | 'saga',
+         batch:    e.g. '2024 Batch 1',
+         type:     'student' | 'parent',
+         name:     'Real name' or relationship label (e.g. "Eva's parent")
+         photoSlotId: id for the <image-slot> (persists dropped photo per id)
+         comment:  quote text
+         status:   'published' | 'placeholder'
+       }
+       ───────────────────────────────────────────────────────── */
+    const VOICES = [
+
+      /* ============ REAL, CONSENT-CONFIRMED (3) ============ */
+      {
+        program: 'saga', batch: '2024 Batch 1', type: 'student',
+        name: 'Eva', photoSlotId: 'voice-eva',
+        comment: "Coming from an edutourism trip to Bali, I grew an affection for Japan that I didn't expect. Now I'm motivated to study abroad.",
+        status: 'published'
+      },
+      {
+        program: 'saga', batch: '2025 Batch 2', type: 'student',
+        name: 'Lux', school: 'SMA Santa Ursula Jakarta', photoSlotId: 'voice-lux',
+        comment: "I'm aspiring to international relations and diplomacy. This exchange gave me the kind of cross-cultural understanding you can't learn from a textbook.",
+        status: 'published'
+      },
+      {
+        program: 'saga', batch: '2025 Batch 2', type: 'student',
+        name: 'Aqeela', school: 'Jakarta Islamic Girls Boarding School', photoSlotId: 'voice-aqeela',
+        comment: "The program sparked a real interest in Japanese culture for me — I see it now as a first step toward studying abroad.",
+        status: 'published'
+      },
+
+      /* ============ PLACEHOLDERS — DO NOT PUBLISH ============ */
+      /* --- VEP student placeholders --- */
+      {
+        program: 'vep', batch: '2026 Batch 1', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-vep-s-1',
+        comment: "[Quote direction: reflection on their favorite VEP session with Japanese peers — what surprised them, what stayed with them.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 1', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-vep-s-2',
+        comment: "[Quote direction: how the language foundations month changed their confidence in speaking Japanese or English.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 1', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-vep-s-3',
+        comment: "[Quote direction: a moment during the joint PBL project where cross-cultural collaboration clicked.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 2', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-vep-s-4',
+        comment: "[Quote direction: why they chose VEP as a first step — did it feel like a pathway to studying abroad?]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 2', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-vep-s-5',
+        comment: "[Quote direction: friendships that continued beyond the two months — with which peer, and how.]",
+        status: 'placeholder'
+      },
+
+      /* --- Saga & Fukuoka student placeholders (future batches) --- */
+      {
+        program: 'saga', batch: '2026 Batch 3', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-saga-s-1',
+        comment: "[Quote direction: first day at Saga Gakuen — the classroom, the classmates, the language leap.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2026 Batch 3', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-saga-s-2',
+        comment: "[Quote direction: living with a host family — a small everyday moment that shifted their view of Japan.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2026 Batch 3', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-saga-s-3',
+        comment: "[Quote direction: what they carried home — a lasting friendship, a change in how they think about their future.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2027 Batch 4', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-saga-s-4',
+        comment: "[Quote direction: comparing expectations before the trip to the reality of daily life at a Japanese high school.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2027 Batch 4', type: 'student',
+        name: '[Student Name]', photoSlotId: 'ph-saga-s-5',
+        comment: "[Quote direction: advice they would give to next year's cohort — one specific, honest piece.]",
+        status: 'placeholder'
+      },
+
+      /* --- VEP parent placeholders --- */
+      {
+        program: 'vep', batch: '2026 Batch 1', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-vep-p-1',
+        comment: "[Quote direction: what the parent noticed change at home during the two-month program — even in small ways.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 1', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-vep-p-2',
+        comment: "[Quote direction: why they chose to support their child joining the program, and any hesitation they had.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 2', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-vep-p-3',
+        comment: "[Quote direction: a specific moment — a call, a story shared at dinner — where they saw their child grow.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 2', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-vep-p-4',
+        comment: "[Quote direction: what they'd say to a parent considering VEP for their own child.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'vep', batch: '2026 Batch 2', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-vep-p-5',
+        comment: "[Quote direction: how the online format fit their family's situation — accessibility, cost, feasibility.]",
+        status: 'placeholder'
+      },
+
+      /* --- Saga & Fukuoka parent placeholders --- */
+      {
+        program: 'saga', batch: '2026 Batch 3', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-saga-p-1',
+        comment: "[Quote direction: the moment of sending their child abroad — worry and pride, in real terms.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2026 Batch 3', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-saga-p-2',
+        comment: "[Quote direction: staying in touch with the host family after the program — a relationship that continues.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2026 Batch 3', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-saga-p-3',
+        comment: "[Quote direction: what changed in their child on returning home — confidence, curiosity, independence.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2027 Batch 4', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-saga-p-4',
+        comment: "[Quote direction: how they explained the program to family and friends — what they said it was really about.]",
+        status: 'placeholder'
+      },
+      {
+        program: 'saga', batch: '2027 Batch 4', type: 'parent',
+        name: "[Student Name]'s parent", photoSlotId: 'ph-saga-p-5',
+        comment: "[Quote direction: a piece of practical advice for parents whose child is about to depart.]",
+        status: 'placeholder'
+      },
+    ];
+
+    /* ───── Program label lookup ───── */
+    const PROGRAM_LABELS = {
+      vep:  { label: 'Virtual Exchange Program', short: 'VEP',   cls: 'pgm-vep'  },
+      saga: { label: 'Exchange Program · Saga & Fukuoka', short: 'Saga & Fukuoka', cls: 'pgm-saga' },
+    };
+    const TYPE_LABELS = {
+      student: { label: 'Student', cls: 'type-student' },
+      parent:  { label: 'Parent',  cls: 'type-parent'  },
+    };
+
+    /* ───── Rendering ───── */
+    function initials(name){
+      if(!name) return '?';
+      const clean = name.replace(/[\[\]']/g, '').trim();
+      if(clean.toLowerCase().includes('student name')) return '?';
+      if(clean.toLowerCase().includes('parent')) return 'P';
+      const parts = clean.split(/\s+/);
+      return (parts[0]?.[0] || '?').toUpperCase();
+    }
+
+    function renderCard(v){
+      const pgm = PROGRAM_LABELS[v.program];
+      const typ = TYPE_LABELS[v.type];
+      const isPh = v.status === 'placeholder';
+      const article = document.createElement('article');
+      article.className = 'voice-card' + (isPh ? ' is-placeholder' : '');
+      article.dataset.program = v.program;
+      article.dataset.type = v.type;
+      article.dataset.status = v.status;
+      article.innerHTML = `
+        <div class="badges">
+          <span class="pgm-badge ${pgm.cls}">${pgm.short}</span>
+          <span class="type-badge ${typ.cls}">${typ.label}</span>
+        </div>
+        <blockquote>${escapeHtml(v.comment)}</blockquote>
+        <div class="attribution">
+          <div class="avatar">
+            <image-slot id="${v.photoSlotId}" placeholder="Photo" fit="cover"></image-slot>
+          </div>
+          <div class="meta">
+            <div class="name">${escapeHtml(v.name)}${v.school ? ` <span class="muted" style="font-weight:400;">· ${escapeHtml(v.school)}</span>`:''}</div>
+            <div class="batch">${escapeHtml(v.batch)} · ${escapeHtml(pgm.label)}</div>
+          </div>
+        </div>
+      `;
+      // Fallback: show initial in avatar if no image is dropped
+      const avatar = article.querySelector('.avatar');
+      const fallback = document.createElement('span');
+      fallback.className = 'avatar-initial';
+      fallback.textContent = initials(v.name);
+      fallback.style.cssText = 'position:absolute; pointer-events:none;';
+      // Wrap in relative container
+      avatar.style.position = 'relative';
+      avatar.insertBefore(fallback, avatar.firstChild);
+      return article;
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      }[c]));
+    }
+
+    /* ───── Render into sections ───── */
+    const studentGrid = document.getElementById('student-grid');
+    const parentGrid  = document.getElementById('parent-grid');
+    VOICES.forEach(v => {
+      const card = renderCard(v);
+      (v.type === 'student' ? studentGrid : parentGrid).appendChild(card);
+    });
+
+    /* ───── Filter state ───── */
+    const filterState = { program: 'all', type: 'all' };
+
+    function updateCounts(){
+      const counts = {
+        'program:all': 0, 'program:vep': 0, 'program:saga': 0,
+        'type:all': 0,    'type:student': 0, 'type:parent': 0,
+      };
+      VOICES.forEach(v => {
+        counts['program:all']++;
+        counts['type:all']++;
+        counts[`program:${v.program}`]++;
+        counts[`type:${v.type}`]++;
+      });
+      for(const [k, n] of Object.entries(counts)){
+        const el = document.querySelector(`[data-count="${k}"]`);
+        if(el) el.textContent = n;
+      }
+      // Hero quick stats
+      const total = VOICES.length;
+      const real = VOICES.filter(v => v.status === 'published').length;
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-real').textContent = real;
+    }
+
+    function applyFilters(){
+      let visible = 0;
+      let studentVisible = 0;
+      let parentVisible = 0;
+      document.querySelectorAll('.voice-card').forEach(card => {
+        const p = card.dataset.program;
+        const t = card.dataset.type;
+        const show =
+          (filterState.program === 'all' || filterState.program === p) &&
+          (filterState.type === 'all' || filterState.type === t);
+        card.style.display = show ? '' : 'none';
+        if(show){
+          visible++;
+          if(t === 'student') studentVisible++;
+          else if(t === 'parent') parentVisible++;
+        }
+      });
+      document.getElementById('visible-count').textContent = visible;
+      document.getElementById('student-num').textContent = `${studentVisible} voice${studentVisible === 1 ? '' : 's'}`;
+      document.getElementById('parent-num').textContent  = `${parentVisible} voice${parentVisible === 1 ? '' : 's'}`;
+
+      // Show/hide sections if voice-type filter narrowed it down
+      const studentSection = document.getElementById('student-section');
+      const parentSection  = document.getElementById('parent-section');
+      studentSection.hidden = (filterState.type === 'parent');
+      parentSection.hidden  = (filterState.type === 'student');
+
+      // Empty states
+      document.getElementById('student-empty').hidden = studentVisible !== 0 || filterState.type === 'parent';
+      document.getElementById('parent-empty').hidden  = parentVisible  !== 0 || filterState.type === 'student';
+    }
+
+    document.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.filter;
+        const v = chip.dataset.value;
+        // Update active state within the same filter group
+        document.querySelectorAll(`.chip[data-filter="${f}"]`).forEach(c => c.classList.remove('on'));
+        chip.classList.add('on');
+        filterState[f] = v;
+        applyFilters();
+      });
+    });
+
+    updateCounts();
+    applyFilters();
+  </script>
+
+  <script src="assets/i18n.js?v=20260817-4"></script>
+  <script src="assets/chrome.js?v=20260817-4"></script>
+</body>
+</html>

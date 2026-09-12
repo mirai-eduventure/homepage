@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>News — Mirai Eduventure Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css?v=20260817-4"/>
+  <style>
+    .filter-row{
+      display: flex; gap: 8px; flex-wrap: wrap; padding: var(--s-md) 0 var(--s-xl);
+    }
+    .chip{
+      padding: 6px 14px; border-radius: 100px; font-size: 12px; font-weight: 500;
+      background: var(--cream-white); border: 0.5px solid var(--line-strong); color: var(--ink-mid);
+      cursor: pointer;
+    }
+    .chip.on{ background: var(--brown-dark); color: var(--cream-white); border-color: var(--brown-dark); }
+    .news-list{ display: flex; flex-direction: column; }
+    .news-item .thumb{
+      width: 160px; aspect-ratio: 16/10; border-radius: 10px; overflow: hidden;
+      background: var(--cream-dark);
+    }
+    .news-item .body{ display: flex; flex-direction: column; gap: 6px; }
+    .news-item .row-tags{ display: flex; gap: 6px; margin-top: 6px; }
+    .news-item h3{ font-size: 18px; color: var(--brown-dark); }
+    .news-item .body p{ color: var(--ink-mid); font-size: 14px; line-height: 1.6; margin-top: 4px; }
+    .news-item .cta-arrow{ color: var(--terracotta); font-weight: 500; font-size: 13px; align-self: end; }
+    @media (max-width: 720px){
+      .news-item .thumb{ width: 100%; }
+      .news-item .cta-arrow{ align-self: start; }
+    }
+
+    .featured{
+      background: var(--brown-dark); color: var(--cream-white);
+      border-radius: var(--r-card); overflow: hidden;
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0;
+      margin-bottom: var(--s-2xl);
+    }
+    @media (max-width: 860px){ .featured{ grid-template-columns: 1fr; } }
+    .featured .thumb{ min-height: 320px; background: var(--brown-mid); }
+    .featured .body{ padding: var(--s-3xl); display: flex; flex-direction: column; gap: var(--s-md); }
+    .featured h2{ color: var(--cream-white); font-size: 28px; letter-spacing: -0.01em; line-height: 1.2; }
+    .featured p{ color: rgba(253,250,246,0.85); }
+
+    /* Draft/placeholder articles — visually distinct until real content is filled in */
+    .news-item.is-draft{
+      opacity: 0.65;
+      position: relative;
+    }
+    .news-item.is-draft .thumb{
+      background: repeating-linear-gradient(45deg,
+        var(--cream-dark) 0 12px,
+        var(--cream-white) 12px 24px);
+      border: 1px dashed var(--line-strong);
+    }
+    .news-item.is-draft::before{
+      content: "DRAFT";
+      position: absolute;
+      top: var(--s-xl); right: 0;
+      background: var(--ink-mid); color: var(--cream-white);
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      padding: 3px 10px; border-radius: 4px;
+      z-index: 2;
+    }
+    .news-item.is-draft h3{ color: var(--ink-mid); }
+    .news-item.is-draft .badge{
+      background: transparent; color: var(--ink-soft);
+      border: 1px dashed var(--line-strong);
+    }
+    .news-item.is-draft:hover{ opacity: 0.85; }
+  </style>
+</head>
+<body data-active="news" data-base="./">
+  <script src="assets/image_slot.js"></script>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="path"><a href="index.html">Home</a> · News</div>
+      <div class="row-between" style="align-items: end;">
+        <div>
+          <h1 class="display" style="color: var(--brown-dark); margin-top: 4px;" data-i18n="news.title">News</h1>
+          <p class="muted" style="font-size: 17px; max-width: 640px;" data-i18n="news.sub">
+            A chronological archive of company milestones since we started in 2023.
+          </p>
+        </div>
+        <div class="filter-row">
+          <span class="chip on">All</span>
+          <span class="chip">Partnerships</span>
+          <span class="chip">Cohorts</span>
+          <span class="chip">Company</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Featured (most recent) -->
+      <div class="featured">
+        <div class="thumb">
+          <image-slot id="news-featured" placeholder="Karatsu Higashi partnership signing photo" fit="cover" style="width:100%;height:100%;"></image-slot>
+        </div>
+        <div class="body">
+          <span class="eyebrow dark" data-i18n="news.featured.eyebrow">Featured · Latest</span>
+          <div class="row" style="gap: 8px; margin-top: 6px;">
+            <span class="badge" style="background: rgba(253,250,246,0.14); color: var(--cream-white);">Virtual Exchange Program</span>
+            <span class="caption" style="color: rgba(253,250,246,0.7);">August, 2026</span>
+          </div>
+          <h2>VEP Registration Batch 2 starts from Aug 3rd</h2>
+          <p>Registration for the second batch of our Virtual Exchange Program is now open. This batch will connect 10 Japanese and 10 Indonesian high school students over two months, building on the foundation set by our successful first batch earlier this year.</p>
+        </div>
+      </div>
+
+      <!-- Archive list -->
+      <div class="news-list">
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-1" placeholder="Karatsu Higashi partnership photo" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">August 2026</span>
+            <h3>New Partnership: Karatsu Higashi High School</h3>
+            <p>We're excited to announce a new partnership with Karatsu Higashi High School — a school with over 120 years of history and the motto "Light, Strength, Hope." This partnership expands our presence in Saga, with a Virtual Exchange Program beginning in 2026 and Exchange Program planned for June–July 2027.</p>
+            <div class="row-tags">
+              <span class="badge">Partnership</span>
+              <span class="badge badge-jp">Saga | Japan</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-2" placeholder="Saga Prefectural Board of Education visit" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">July 2026</span>
+            <h3>Visited the Saga Prefectural Board of Education</h3>
+            <p>We visited the Education Promotion Division of the Saga Prefectural Board of Education to strengthen ties with the local community supporting our Exchange Program. The visit marked another step in deepening our relationship with Saga as a region — beyond our partner schools alone.</p>
+            <div class="row-tags">
+              <span class="badge">Visitation</span>
+              <span class="badge">Saga Prefectural Board of Education</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-3" placeholder="Saga local newspaper / TV coverage" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">July 2026</span>
+            <h3>Featured in Saga Local Newspaper and Saga Local TV</h3>
+            <p>Our growing partnership with Saga Gakuen High School caught the attention of local media — our Exchange Program was featured in Saga Local Newspaper and Saga Local TV, highlighting the deepening relationship between our Indonesian students and the Saga community.</p>
+            <div class="row-tags">
+              <span class="badge">Local News &amp; Media in Japan</span>
+              <span class="badge">Exchange Program</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-4" placeholder="Exchange Program 2026 completion" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">July 2026</span>
+            <h3>Completion of Exchange Program 2026 in Saga &amp; Fukuoka</h3>
+            <p>Our third batch completed the Exchange Program at Saga Gakuen High School — our biggest cohort to date, growing from 1 student in 2024, to 2 in 2025, to 6 this year. Each student returned home with real friendships, a deeper understanding of Japan, and a broadened sense of what's possible for their future.</p>
+            <div class="row-tags">
+              <span class="badge">Exchange Program</span>
+              <span class="badge badge-jp">Saga | Japan</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-5" placeholder="Exchange Program Batch 3 departure" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">June 2026</span>
+            <h3>Departure of Exchange Program Batch 3</h3>
+            <p>Our third batch of the Exchange Program departed for Saga, Japan — our largest group yet, with 6 students. Building on two years of growing partnership with Saga Gakuen High School, this batch will attend real classes, live with host families, and carry forward the tradition our very first pioneering student began.</p>
+            <div class="row-tags">
+              <span class="badge">Exchange Program</span>
+              <span class="badge badge-jp">Saga | Japan</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-6" placeholder="VEP Batch 1 completion" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">March 2026</span>
+            <h3>Completion of Virtual Exchange Program Batch 1</h3>
+            <p>Our first Virtual Exchange Program batch came to a close, bringing together 5 Japanese and 4 Indonesian high school students over two months of language learning and collaborative project work. Despite being entirely online, students built real connections across borders — proving that meaningful exchange doesn't require a plane ticket to begin.</p>
+            <div class="row-tags">
+              <span class="badge">Virtual Exchange Program</span>
+              <span class="badge">Completed</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-7" placeholder="VEP Batch 1 launch" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">February 2026</span>
+            <h3>New Program: Virtual Exchange Program Batch 1</h3>
+            <p>We launched a new kind of program: the Virtual Exchange Program, connecting Indonesian and Japanese high school students entirely online. Over two months, students build foundational language skills before collaborating with their Japanese peers on a project-based learning journey — bringing real, cross-border connection to students who may not yet be able to travel abroad.</p>
+            <div class="row-tags">
+              <span class="badge">Virtual Exchange Program</span>
+              <span class="badge">New Program</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-8" placeholder="Exchange Program 2025 completion" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">July 2025</span>
+            <h3>Completion of Exchange Program 2025 in Saga &amp; Fukuoka</h3>
+            <p>Our second batch of the Exchange Program grew to 2 students at Saga Gakuen High School, building on the foundation set by our pioneering first batch. Each student attended real classes, lived with host families, and formed friendships that continue today.</p>
+            <div class="row-tags">
+              <span class="badge">Exchange Program</span>
+              <span class="badge badge-jp">Saga | Japan</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-9" placeholder="Exchange Program 2024 completion" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">July 2024</span>
+            <h3>Completion of Exchange Program 2024 in Saga &amp; Fukuoka</h3>
+            <p>Our very first batch completed the Exchange Program at Saga Gakuen High School — a single pioneering student who spent time attending real classes, living with a host family, and experiencing daily life in Saga, Japan. This small but meaningful beginning laid the foundation for the future batches that would follow.</p>
+            <div class="row-tags">
+              <span class="badge">Exchange Program</span>
+              <span class="badge badge-jp">Saga | Japan</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+
+        <article class="news-item">
+          <div class="thumb"><image-slot id="news-item-10" placeholder="Saga Gakuen partnership announcement" fit="cover" style="width:100%;height:100%;"></image-slot></div>
+          <div class="body">
+            <span class="date">March 2023</span>
+            <h3>New Partnership: Saga Gakuen High School</h3>
+            <p>Mirai Eduventure Indonesia is proud to announce our first school partnership: Saga Gakuen High School in Saga, Japan. This partnership marked the beginning of our Exchange Program, giving Indonesian high school students the chance to attend real high schools' classes, live with host families, and build lasting friendships in Japan.</p>
+            <div class="row-tags">
+              <span class="badge">Partnership</span>
+              <span class="badge badge-jp">Saga | Japan</span>
+            </div>
+          </div>
+          <a href="#" class="cta-arrow">Read more →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm">
+    <div class="container">
+      <div style="background: var(--terra-pale); border-radius: var(--r-card); padding: var(--s-2xl); display: grid; grid-template-columns: 1fr auto; gap: var(--s-lg); align-items: center;">
+        <div>
+          <h2 style="color: var(--brown-dark);" data-i18n="news.stayConnected.title">Stay connected.</h2>
+          <p class="muted" style="margin-top: 6px;" data-i18n="news.stayConnected.body">We'll share milestones, cohort openings, and behind-the-scenes updates.</p>
+        </div>
+        <a class="btn btn-primary btn-lg" href="contact.html">Contact us <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/i18n.js?v=20260817-4"></script>
+  <script src="assets/chrome.js?v=20260817-4"></script>
+</body>
+</html>
